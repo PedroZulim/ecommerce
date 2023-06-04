@@ -17,7 +17,4 @@ public class Produto {
     private Long id;
     private String nome;
     private double preco;
-
-    // Construtores, getters e setters aqui
-
 }

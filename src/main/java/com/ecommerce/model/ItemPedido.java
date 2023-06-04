@@ -19,9 +19,4 @@ public class ItemPedido {
 
     @ManyToOne
     private Pedido pedido;
-
-    // Outros atributos do item de pedido aqui
-
-    // Construtores, getters e setters aqui
-
 }

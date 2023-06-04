@@ -30,7 +30,4 @@ public class Pedido {
     private List<ItemPedido> itens;
 
     private double valor;
-
-    // Construtores, getters e setters aqui
-
 }
