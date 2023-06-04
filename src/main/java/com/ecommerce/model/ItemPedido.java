@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,12 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Produto produto;
-    private int quantidade;
+
+    @ManyToOne
+    private Pedido pedido;
+
+    // Outros atributos do item de pedido aqui
+
+    // Construtores, getters e setters aqui
+
 }
