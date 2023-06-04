@@ -1,0 +1,29 @@
+-- Criação da tabela Cliente
+CREATE TABLE cliente (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL
+);
+
+-- Criação da tabela Pedido
+CREATE TABLE pedido (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cliente_id INT NOT NULL,
+  -- outros campos do pedido
+  FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+);
+
+-- Criação da tabela ItemPedido
+CREATE TABLE item_pedido (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  pedido_id INT NOT NULL,
+  -- outros campos do item de pedido
+  FOREIGN KEY (pedido_id) REFERENCES pedido(id)
+);
+
+-- Criação da tabela Produto
+CREATE TABLE produto (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL
+);
+
