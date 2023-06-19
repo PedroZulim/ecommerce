@@ -1,13 +1,14 @@
 package com.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.ecommerce.model.Cliente;
 import com.ecommerce.service.ClienteService;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/clientes")
 public class ClienteController {
 
@@ -29,9 +30,29 @@ public class ClienteController {
         return clienteService.saveCliente(cliente);
     }
 
+    @PutMapping("/{id}")
+    public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente clienteDetails) {
+        Cliente cliente = clienteService.getClienteById(id);
+        cliente.setNome(clienteDetails.getNome());
+        return clienteService.saveCliente(cliente);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
+    public void deleteCliente(@PathVariable Long id) {
         clienteService.deleteCliente(id);
-        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pagina")
+    public String getClientes(Model model) {
+        model.addAttribute("clientes", clienteService.getAllClientes());
+        model.addAttribute("cliente", new Cliente());
+        return "cliente";
+    }
+
+    @PostMapping("/pagina")
+    public String createCliente(@ModelAttribute Cliente cliente) {
+        clienteService.saveCliente(cliente);
+        return "redirect:/clientes/pagina";
     }
 }
+

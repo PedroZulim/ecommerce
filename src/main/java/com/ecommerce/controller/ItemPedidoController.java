@@ -1,22 +1,23 @@
 package com.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.ecommerce.model.ItemPedido;
 import com.ecommerce.service.ItemPedidoService;
 import java.util.List;
 
-@RestController
-@RequestMapping("/itens-pedido")
+@Controller
+@RequestMapping("/itensPedido")
 public class ItemPedidoController {
 
     @Autowired
     private ItemPedidoService itemPedidoService;
 
     @GetMapping
-    public List<ItemPedido> getAllItemPedidos() {
-        return itemPedidoService.getAllItemPedidos();
+    public List<ItemPedido> getAllItensPedido() {
+        return itemPedidoService.getAllItensPedido();
     }
 
     @GetMapping("/{id}")
@@ -29,10 +30,30 @@ public class ItemPedidoController {
         return itemPedidoService.saveItemPedido(itemPedido);
     }
 
+    @PutMapping("/{id}")
+    public ItemPedido updateItemPedido(@PathVariable Long id, @RequestBody ItemPedido itemPedidoDetails) {
+        ItemPedido itemPedido = itemPedidoService.getItemPedidoById(id);
+        itemPedido.setProduto(itemPedidoDetails.getProduto());
+        itemPedido.setQuantidade(itemPedidoDetails.getQuantidade());
+        return itemPedidoService.saveItemPedido(itemPedido);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteItemPedido(@PathVariable Long id) {
+    public void deleteItemPedido(@PathVariable Long id) {
         itemPedidoService.deleteItemPedido(id);
-        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pagina")
+    public String getItensPedido(Model model) {
+        model.addAttribute("itensPedido", itemPedidoService.getAllItensPedido());
+        model.addAttribute("itemPedido", new ItemPedido());
+        return "itemPedido";
+    }
+
+    @PostMapping("/pagina")
+    public String createItemPedido(@ModelAttribute ItemPedido itemPedido) {
+        itemPedidoService.saveItemPedido(itemPedido);
+        return "redirect:/itensPedido/pagina";
     }
 }
 
