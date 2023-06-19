@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gerenciamento de Pedidos</title>
+</head>
+<body>
+<h1>Criar Pedido</h1>
+
+<form action="#" th:action="@{/pedidos}" th:object="${pedido}" method="post">
+    <p>ID do Cliente: <input type="text" th:field="*{clienteId}" /></p>
+    <p>Produtos: <input type="text" th:field="*{produtoIds}" /></p>
+    <!-- Substitua 'produtoIds' acima por um campo que faz sentido no seu contexto. Talvez você queira fornecer uma lista dropdown de produtos -->
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+<h1>Pedidos</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Produtos</th>
+    </tr>
+    <tr th:each="pedido : ${pedidos}">
+        <td th:text="${pedido.id}"></td>
+        <td th:text="${pedido.cliente.nome}"></td>
+        <td>
+            <ul>
+                <li th:each="itemPedido : ${pedido.itensPedido}">
+                    <span th:text="${itemPedido.produto.nome}"></span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
