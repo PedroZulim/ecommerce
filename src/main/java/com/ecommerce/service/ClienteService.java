@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.model.Cliente;
-import com.ecommerce.repository.ClienteRepository;
 
-@Service
+@RestController
 public class ClienteService {
 
   @Bean
@@ -22,19 +21,31 @@ public class ClienteService {
   @Autowired
   private ClienteRepository clienteRepository;
 
-  public List<Cliente> getAllClientes() {
-    return clienteRepository.findAll();
-  }
 
-  public Cliente getClienteById(Long id) {
-    return clienteRepository.findById(id).orElse(null);
-  }
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		return builder.build();
+	}
 
-  public Cliente saveCliente(Cliente cliente) {
-    return clienteRepository.save(cliente);
-  }
+	@RequestMapping(path="/getcliente", method=RequestMethod.GET)
+	public ResponseEntity<String> getCliente(Long id){
 
-  public void deleteCliente(Long id) {
-    clienteRepository.deleteById(id);
-  }
+		Cliente respCli = new Cliente();
+		String errResp = "";
+		ResponseEntity<String> response = null;
+
+		try {
+
+			response = new ResponseEntity<String>(respCli.toString(), HttpStatus.OK);
+		
+		} catch (Exception e) {
+
+			errResp = "{\"sucesso\": \"False - Erro ao localizar cliente !\"}";
+			response = new ResponseEntity<String>(errResp, HttpStatus.EXPECTATION_FAILED);
+
+		}
+		return response;
+		
+	}
+	
 }
