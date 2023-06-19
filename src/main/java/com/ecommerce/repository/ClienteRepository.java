@@ -7,4 +7,3 @@ import com.ecommerce.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 }
-
