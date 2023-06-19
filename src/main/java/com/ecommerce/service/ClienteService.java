@@ -1,14 +1,17 @@
 package com.ecommerce.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.model.Cliente;
+import com.ecommerce.repository.ClienteRepository;
 
 @RestController
 public class ClienteService {
@@ -20,12 +23,6 @@ public class ClienteService {
   
   @Autowired
   private ClienteRepository clienteRepository;
-
-
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
 
 	@RequestMapping(path="/getcliente", method=RequestMethod.GET)
 	public ResponseEntity<String> getCliente(Long id){
