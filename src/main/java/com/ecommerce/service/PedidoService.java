@@ -1,32 +1,30 @@
 package com.ecommerce.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ecommerce.model.Pedido;
 import com.ecommerce.repository.PedidoRepository;
+import java.util.List;
 
 @Service
 public class PedidoService {
-  
-  @Autowired
-  private PedidoRepository pedidoRepository;
 
-  public List<Pedido> getAllPedidos() {
-    return pedidoRepository.findAll();
-  }
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
-  public Pedido getPedidoById(Long id) {
-    return pedidoRepository.findById(id).orElse(null);
-  }
+    public List<Pedido> getAllPedidos() {
+        return pedidoRepository.findAll();
+    }
 
-  public Pedido savePedido(Pedido pedido) {
-    return pedidoRepository.save(pedido);
-  }
+    public Pedido getPedidoById(Long id) {
+        return pedidoRepository.findById(id).orElse(null);
+    }
 
-  public void deletePedido(Long id) {
-    pedidoRepository.deleteById(id);
-  }
+    public Pedido savePedido(Pedido pedido) {
+        return pedidoRepository.save(pedido);
+    }
+
+    public void deletePedido(Long id) {
+        pedidoRepository.deleteById(id);
+    }
 }
