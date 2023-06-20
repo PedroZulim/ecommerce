@@ -17,17 +17,12 @@ public class ItemPedidoController {
 
     @GetMapping
     public List<ItemPedido> getAllItensPedido() {
-        return itemPedidoService.getAllItensPedido();
+        return itemPedidoService.getAllItemPedidos();
     }
 
     @GetMapping("/{id}")
     public ItemPedido getItemPedidoById(@PathVariable Long id) {
         return itemPedidoService.getItemPedidoById(id);
-    }
-
-    @PostMapping
-    public ItemPedido createItemPedido(@RequestBody ItemPedido itemPedido) {
-        return itemPedidoService.saveItemPedido(itemPedido);
     }
 
     @PutMapping("/{id}")
@@ -45,7 +40,7 @@ public class ItemPedidoController {
 
     @GetMapping("/pagina")
     public String getItensPedido(Model model) {
-        model.addAttribute("itensPedido", itemPedidoService.getAllItensPedido());
+        model.addAttribute("itensPedido", itemPedidoService.getAllItemPedidos());
         model.addAttribute("itemPedido", new ItemPedido());
         return "itemPedido";
     }

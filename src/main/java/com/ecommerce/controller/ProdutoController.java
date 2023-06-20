@@ -25,11 +25,6 @@ public class ProdutoController {
         return produtoService.getProdutoById(id);
     }
 
-    @PostMapping
-    public Produto createProduto(@RequestBody Produto produto) {
-        return produtoService.saveProduto(produto);
-    }
-
     @PutMapping("/{id}")
     public Produto updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetails) {
         Produto produto = produtoService.getProdutoById(id);

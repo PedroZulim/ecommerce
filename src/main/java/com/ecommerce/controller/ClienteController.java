@@ -25,11 +25,6 @@ public class ClienteController {
         return clienteService.getClienteById(id);
     }
 
-    @PostMapping
-    public Cliente createCliente(@RequestBody Cliente cliente) {
-        return clienteService.saveCliente(cliente);
-    }
-
     @PutMapping("/{id}")
     public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente clienteDetails) {
         Cliente cliente = clienteService.getClienteById(id);

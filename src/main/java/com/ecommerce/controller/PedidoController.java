@@ -24,16 +24,11 @@ public class PedidoController {
         return pedidoService.getPedidoById(id);
     }
 
-    @PostMapping
-    public Pedido createPedido(@RequestBody Pedido pedido) {
-        return pedidoService.savePedido(pedido);
-    }
-
     @PutMapping("/{id}")
     public Pedido updatePedido(@PathVariable Long id, @RequestBody Pedido pedidoDetails) {
         Pedido pedido = pedidoService.getPedidoById(id);
         pedido.setCliente(pedidoDetails.getCliente());
-        pedido.setItensPedido(pedidoDetails.getItensPedido());
+        pedido.setItens(pedidoDetails.getItens());
         return pedidoService.savePedido(pedido);
     }
 
